@@ -3,31 +3,18 @@ import { Link } from "gatsby"
 
 import Layout from "../components/layout"
 import Seo from "../components/seo"
+import { createClient } from "contentful"
+import axios from "axios"
+import ImageCard from "../components/ImageCard"
 
 const UsingSSR = ({ serverData }) => {
+  console.log(serverData)
   return (
     <Layout>
-      <h1>
-        This page is <b>rendered server-side</b>
-      </h1>
-      <p>
-        This page is rendered server side every time the page is requested.
-        Reload it to see a(nother) random photo from{" "}
-        <code>dog.ceo/api/breed/shiba/images/random</code>:
-      </p>
-      <img
-        style={{ width: "320px", borderRadius: "var(--border-radius)" }}
-        alt="A random dog"
-        src={serverData.message}
-      />
-      <p>
-        To learn more, head over to our{" "}
-        <a href="https://www.gatsbyjs.com/docs/reference/rendering-options/server-side-rendering/">
-          documentation about Server Side Rendering
-        </a>
-        .
-      </p>
-      <Link to="/">Go back to the homepage</Link>
+      <h1>test</h1>
+      {serverData.map((item) =>  (
+      <ImageCard {...item} />
+      ))}
     </Layout>
   )
 }
@@ -38,12 +25,9 @@ export default UsingSSR
 
 export async function getServerData() {
   try {
-    const res = await fetch(`https://dog.ceo/api/breed/shiba/images/random`)
-    if (!res.ok) {
-      throw new Error(`Response failed`)
-    }
+    const data = await axios.get(`https://cdn.contentful.com/spaces/fzqb4a3oqk4f/environments/master/entries?access_token=QDOe_tOfFIVZMcERftqeHlGJRf6xfSGi3BWJkiFUln4&content_type=test`)
     return {
-      props: await res.json(),
+      props: data.data.items,
     }
   } catch (error) {
     return {
