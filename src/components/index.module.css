@@ -1,3 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;700&display=swap');
+
+html, body {
+  overflow: hidden !important;
+}
+
+h1,h2,h3,h4,h5,h6, li, a, p, span {
+  font-family: Quicksand !important;
+  font-weight: 400;
+}
+
 .list {
   display: grid;
   margin: 0;

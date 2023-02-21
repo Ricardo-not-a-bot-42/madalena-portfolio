@@ -6,16 +6,17 @@ import Seo from "../components/seo"
 import { createClient } from "contentful"
 import axios from "axios"
 import ImageCard from "../components/ImageCard"
+import MainLayout from "../components/Layout/index"
 
 const UsingSSR = ({ serverData }) => {
   console.log(serverData)
   return (
-    <Layout>
+    <MainLayout>
       <h1>test</h1>
       {serverData.map((item) =>  (
       <ImageCard {...item} />
       ))}
-    </Layout>
+    </MainLayout>
   )
 }
 
